@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Расчёт зарплаты — МС мулаточный модуль</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+
+      <h1>Говори, сколько?</h1>
+
+      <div class="module-badge">
+        <span class="module-kicker">Подразделение</span>
+        <span class="module-title">МС мулаточный модуль</span>
+      </div>
+
+      <div class="amounts">
+        <div class="amount-card">
+          <span class="amount-label">МБО</span>
+          <span class="amount-value">30 540 ₽</span>
+        </div>
+        <div class="amount-card">
+          <span class="amount-label">Аванс</span>
+          <span class="amount-value">30 450 ₽</span>
+        </div>
+        <div class="amount-card">
+          <span class="amount-label">ДИ</span>
+          <span class="amount-value">60 900 ₽</span>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="MBO">МБО (%)</label>
+        <input type="number" id="MBO" class="form-control" placeholder="0–100" min="0" max="100">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="DI">ДИ (%)</label>
+        <input type="number" id="DI" class="form-control" placeholder="0–100" min="0" max="100">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="unpaid">Отпуск за свой счёт (дней)</label>
+        <input type="number" id="unpaid" class="form-control" placeholder="0" min="0" value="0">
+        <p class="hint" id="workingDaysHint"></p>
+      </div>
+
+      <div class="text-center">
+        <button id="button" type="button">Рассчитать</button>
+      </div>
+
+      <hr>
+
+      <h2 id="salary">Ваша зарплата: 0 ₽</h2>
+
+    </div>
+  </div>
+
+  <script src="./main.js"></script>
+</body>
+</html>
