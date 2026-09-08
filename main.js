@@ -1,4 +1,4 @@
-const MBO_AMOUNT = 30540
+const MBO_AMOUNT = 30450
 const ADVANCE = 30450
 const DI_AMOUNT = 60900
 
@@ -22,7 +22,7 @@ function getWorkingDays(year, monthIndex) {
 const now = new Date()
 const workingDays = getWorkingDays(now.getFullYear(), now.getMonth())
 const monthName = now.toLocaleDateString("ru-RU", { month: "long", year: "numeric" })
-workingDaysHint.textContent = `Рабочих дней в текущем месяце (${monthName}): ${workingDays}. Удержание считается от аванса.`
+workingDaysHint.textContent = `Рабочих дней в текущем месяце (${monthName}): ${workingDays}. Половина аванса приходит 25 числа, вторая половина — 10 числа. Удержание считается от аванса.`
 
 function limitPercent(input) {
   input.addEventListener("input", () => {
@@ -67,9 +67,10 @@ function calculate() {
     ? (ADVANCE / workingDays) * Math.min(unpaidDays, workingDays)
     : 0
 
-  const advancePay = Math.max(0, ADVANCE - deduction)
-  const total = advancePay + mboPay + diPay
-  const salary10 = mboPay + diPay
+  const paidAdvance = Math.max(0, ADVANCE - deduction)
+  const advance25 = Math.floor(paidAdvance / 2)
+  const salary10 = paidAdvance - advance25 + mboPay + diPay
+  const total = paidAdvance + mboPay + diPay
 
   salary_html.classList.remove("animate-salary")
   void salary_html.offsetWidth
@@ -87,7 +88,7 @@ function calculate() {
   `
 
   animateValue(document.getElementById("total"), 0, total, 2000, "Ваша зарплата: ", "₽")
-  animateValue(document.getElementById("a25"), 0, advancePay, 1500, "Аванс 25 числа: ", "₽")
+  animateValue(document.getElementById("a25"), 0, advance25, 1500, "Аванс 25 числа: ", "₽")
   animateValue(document.getElementById("z10"), 0, salary10, 1500, "Зарплата 10 числа: ", "₽")
 
   if (unpaidDays > 0) {
